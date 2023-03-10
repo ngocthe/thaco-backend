@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+  app:
+    image: orhj-server:v7
+    container_name: orhj-server
+    environment:
+      APP_ENV: "${APP_ENV}"
+      CONTAINER_ROLE: "app"
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "${APP_HTTP_PORT}:80"
+      - "${APP_HTTPS_PORT}:443"
+    networks:
+      - orhj-server-network
+networks:
+  orhj-server-network:
+    driver: bridge

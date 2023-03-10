@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Transformers;
+
+use App\Models\{{modelName}};
+use League\Fractal\Resource\Item;
+use League\Fractal\TransformerAbstract;
+
+class {{modelName}}Transformer extends TransformerAbstract
+{
+    /**
+     * @var array|string[]
+     */
+    protected array $defaultIncludes = [
+        'user'
+    ];
+
+    /**
+     * @param {{modelName}} {{modelNameVariable}}
+     * @return array
+     */
+    public function transform({{modelName}} {{modelNameVariable}}): array
+    {
+        return [
+            'id' => {{modelNameVariable}}->id,
+            {{transformerFields}},
+            'created_at' => {{modelNameVariable}}->created_at->toIso8601String(),
+            'updated_at' => {{modelNameVariable}}->updated_at->toIso8601String(),
+        ];
+    }
+
+    /**
+     * @param {{modelName}} {{modelNameVariable}}
+     * @return Item
+     */
+    public function includeUser({{modelName}} {{modelNameVariable}}): Item
+    {
+        $createdBy = {{modelNameVariable}}->updatedBy;
+        return $this->item($createdBy, new AdminTransformer);
+    }
+}

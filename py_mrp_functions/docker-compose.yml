@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+  web:
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      FLASK_SECRET: "${FLASK_SECRET}"
+      FLASK_HOST: "${FLASK_HOST}"
+      FLASK_PORT: "${FLASK_PORT}"
+      CELERY_BROKER_URL: "${CELERY_BROKER_URL}"
+      CELERY_RESULT_BACKEND: "${CELERY_RESULT_BACKEND}"
+      DB_HOST: "${DB_HOST}"
+      DB_PORT: "${DB_PORT}"
+      DB_DATABASE: "${DB_DATABASE}"
+      DB_USERNAME: "${DB_USERNAME}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+    healthcheck:
+      test: "curl -X GET localhost:3508/health"
+      interval: "60s"
+      timeout: "3s"
+      start_period: "5s"
+      retries: 3
+    ports:
+     - "3508:3508"
+     - "3555:3555"
+     - "6378:6379"
+    volumes: ['./public:/log']
+networks:
+  default:
+    name: h-mysql8_default
+    external: true

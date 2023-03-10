@@ -1,0 +1,570 @@
+{
+    // BOM
+    "part_groups": {
+        "code": {
+            "migration": "string:2|unique",
+            "validation": "required|alpha_num|min:2|max:2|unique:part_groups,code",
+            "filter": "equal"
+        },
+        "description": {
+            "migration": "string:30",
+            "validation": "required|max:30|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "lead_time": {
+            "migration": "mediumInteger",
+            "validation": "required|integer|min:1|max:999"
+        },
+        "ordering_cycle": {
+            "migration": "string:1",
+            "validation": "required|string|min:1|max:1"
+        }
+    },
+    "plants": {
+        "code": {
+            "migration": "string:5|unique",
+            "validation": "required|alpha_num|max:5|unique:plants,code",
+            "filter": "equal"
+        },
+        "description": {
+            "migration": "string:10",
+            "validation": "required|max:10|regex:/[a-zA-Z0-9\\s]+/"
+        }
+    },
+    "ecns": {
+        "code": {
+            "migration": "string:10|unique",
+            "validation": "required|alpha_num|min:7|max:10|unique:ecns,code",
+            "filter": "equal"
+        },
+        "page": {
+            "migration": "mediumInteger",
+            "validation": "required|integer|min:1|max:999",
+            "filter": "equal"
+        },
+        "line": {
+            "migration": "mediumInteger",
+            "validation": "required|integer|min:1|max:999",
+            "filter": "equal"
+        },
+        "description": {
+            "migration": "string:30",
+            "validation": "required|max:30|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "mandatory_level": {
+            "migration": "string:1|nullable",
+            "validation": "nullable|alpha_num|max:1"
+        },
+        "production_interchangeability": {
+            "migration": "string:1|nullable",
+            "validation": "nullable|alpha_num|max:1"
+        },
+        "service_interchangeability": {
+            "migration": "string:1|nullable",
+            "validation": "nullable|alpha_num|max:1"
+        },
+        "released_party": {
+            "migration": "string:5|nullable",
+            "validation": "nullable|alpha_num|max:5",
+            "filter": "equal"
+        },
+        "released_date": {
+            "migration": "date|nullable",
+            "validation": "nullable|date|date_format:Y-m-d",
+            "filter": "equal"
+        },
+        "planned_line_off_date": {
+            "migration": "date|nullable",
+            "validation": "nullable|date|date_format:Y-m-d",
+            "filter": "equal"
+        },
+        "actual_line_off_date": {
+            "migration": "date|nullable",
+            "validation": "nullable|date|date_format:Y-m-d",
+            "filter": "equal"
+        },
+        "planned_packing_date": {
+            "migration": "date|nullable",
+            "validation": "nullable|date|date_format:Y-m-d",
+            "filter": "equal"
+        },
+        "actual_packing_date": {
+            "migration": "date|nullable",
+            "validation": "nullable|date|date_format:Y-m-d",
+            "filter": "equal"
+        },
+        "vin": {
+            "migration": "string:17|nullable",
+            "validation": "nullable|alpha_num|max:17"
+        },
+        "complete_knockdown": {
+            "migration": "string:13|nullable",
+            "validation": "nullable|alpha_num|max:13"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    "vehicle_colors": {
+        "code": {
+            "migration": "string:4|unique",
+            "validation": "required|alpha_num|min:1|max:4|unique:vehicle_colors,code",
+            "filter": "equal"
+        },
+        "type": {
+            "migration": "string:3",
+            "validation": "required|alpha_num|min:1|max:3",
+            "filter": "equal"
+        },
+        "name": {
+            "migration": "string:20",
+            "validation": "required|regex:/[a-zA-Z0-9\\\\s]+/\"|min:1|max:20",
+            "filter": "equal"
+        },
+        "ecn_in": {
+            "migration": "string:10|foreign:ecn_in|references:code|on:ecns|onDelete",
+            "validation": "required|alpha_num|min:7|max:10|exists:ecns,code",
+            "filter": "equal"
+        },
+        "ecn_out": {
+            "migration": "string:10|nullable|foreign:ecn_out|references:code|on:ecns|onDelete",
+            "validation": "nullable|alpha_num|min:7|max:10|exists:ecns,code",
+            "filter": "equal"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    "mscs": {
+        "code": {
+            "migration": "string:7|unique",
+            "validation": "required|alpha_num|min:7|max:7|unique:mscs,code",
+            "filter": "equal"
+        },
+        "description": {
+            "migration": "string:40",
+            "validation": "required|max:40|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "interior_color": {
+            "migration": "string:15",
+            "validation": "required|max:15|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "car_line": {
+            "migration": "string:6",
+            "validation": "required|max:6|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "model_grade": {
+            "migration": "string:40",
+            "validation": "required|max:40|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "body": {
+            "migration": "string:5",
+            "validation": "required|max:5|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "engine": {
+            "migration": "string:6",
+            "validation": "required|max:6|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "transmission": {
+            "migration": "string:5",
+            "validation": "required|max:5|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        },
+        "effective_date_in": {
+            "migration": "date|nullable",
+            "validation": "nullable|date|date_format:Y-m-d"
+        },
+        "effective_date_out": {
+            "migration": "date|nullable",
+            "validation": "nullable|date|date_format:Y-m-d"
+        }
+    },
+    "parts": {
+        "code": {
+            "migration": "string:10|unique",
+            "validation": "required|alpha_num|min:1|max:10|unique:parts,code",
+            "filter": "equal"
+        },
+        "name": {
+            "migration": "string:20",
+            "validation": "required|max:20|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "group": {
+            "migration": "string:2|foreign:group|references:code|on:part_groups|onDelete",
+            "validation": "required|alpha_num|max:2|exists:part_groups,code",
+            "filter": "equal"
+        },
+        "ecn_in": {
+            "migration": "string:10|foreign:ecn_in|references:code|on:ecns|onDelete",
+            "validation": "required|alpha_num|min:7|max:10|exists:ecns,code",
+            "filter": "equal"
+        },
+        "ecn_out": {
+            "migration": "string:10|nullable|foreign:ecn_out|references:code|on:ecns|onDelete",
+            "validation": "nullable|alpha_num|min:7|max:10|exists:ecns,code",
+            "filter": "equal"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    "part_colors": {
+        "code": {
+            "migration": "string:2|unique",
+            "validation": "required|alpha_num|max:2|unique:part_colors,code",
+            "filter": "equal"
+        },
+        "part_code": {
+            "migration": "string:10|foreign:part_code|references:code|on:parts|onDelete",
+            "validation": "required|alpha_num|max:10|exists:parts,code",
+            "filter": "equal"
+        },
+        "name": {
+            "migration": "string:20",
+            "validation": "required|max:20|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "interior_code": {
+            "migration": "string:4|nullable|foreign:interior_code|references:code|on:vehicle_colors|onDelete",
+            "validation": "nullable|alpha_num|max:10|exists:vehicle_colors,code",
+            "filter": "equal"
+        },
+        "vehicle_color_code": {
+            "migration": "string:4|nullable|foreign:interior_code|references:code|on:vehicle_colors|onDelete",
+            "validation": "nullable|alpha_num|max:10|exists:vehicle_colors,code",
+            "filter": "equal"
+        },
+        "ecn_in": {
+            "migration": "string:10|foreign:ecn_in|references:code|on:ecns|onDelete",
+            "validation": "required|alpha_num|min:7|max:10|exists:ecns,code",
+            "filter": "equal"
+        },
+        "ecn_out": {
+            "migration": "string:10|nullable|foreign:ecn_out|references:code|on:ecns|onDelete",
+            "validation": "nullable|alpha_num|min:7|max:10|exists:ecns,code",
+            "filter": "equal"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    "boms": {
+        "msc_code": {
+            "migration": "string:7|foreign:msc_code|references:code|on:mscs|onDelete",
+            "validation": "required|alpha_num|max:7|exists:mscs,code",
+            "filter": "equal"
+        },
+        "shop_code": {
+            "migration": "string:3",
+            "validation": "required|alpha_num|max:3",
+            "filter": "equal"
+        },
+        "part_code": {
+            "migration": "string:10|foreign:part_code|references:code|on:parts|onDelete",
+            "validation": "required|alpha_num|max:10|exists:parts,code",
+            "filter": "equal"
+        },
+        "part_color_code": {
+            "migration": "string:2|foreign:part_color_code|references:code|on:part_colors|onDelete",
+            "validation": "required|alpha_num|max:2|exists:part_colors,code",
+            "filter": "equal"
+        },
+        "quantity": {
+            "migration": "smallInteger|nullable",
+            "validation": "nullable|integer|min:1|max:99"
+        },
+        "ecn_in": {
+            "migration": "string:10|foreign:ecn_in|references:code|on:ecns|onDelete",
+            "validation": "required|alpha_num|min:7|max:10|exists:ecns,code"
+        },
+        "ecn_out": {
+            "migration": "string:10|nullable|foreign:ecn_out|references:code|on:ecns|onDelete",
+            "validation": "nullable|alpha_num|min:7|max:10|exists:ecns,code"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    // PROC DB
+    "suppliers": {
+        "code": {
+            "migration": "string:5|unique",
+            "validation": "required|alpha_num|max:5|unique:suppliers,code",
+            "filter": "equal"
+        },
+        "description": {
+            "migration": "string:20",
+            "validation": "required|max:20|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "address": {
+            "migration": "string:50",
+            "validation": "required|max:20|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "phone": {
+            "migration": "string:20",
+            "validation": "required|max:20|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "forecast_by_week": {
+            "migration": "smallInteger|nullable",
+            "validation": "nullable|integer|min:1|max:99"
+        },
+        "forecast_by_month": {
+            "migration": "smallInteger|nullable",
+            "validation": "nullable|integer|min:1|max:99"
+        }
+    },
+    "procurements": {
+        "part_code": {
+            "migration": "string:10|foreign:part_code|references:code|on:parts|onDelete",
+            "validation": "required|alpha_num|max:10|exists:parts,code",
+            "filter": "equal"
+        },
+        "part_color_code": {
+            "migration": "string:2|foreign:part_color_code|references:code|on:part_colors|onDelete",
+            "validation": "required|alpha_num|max:2|exists:part_colors,code",
+            "filter": "equal"
+        },
+        "minimum_order_quantity": {
+            "migration": "integer|nullable",
+            "validation": "nullable|integer|min:1|max:99999"
+        },
+        "standard_box_quantity": {
+            "migration": "integer|nullable",
+            "validation": "nullable|integer|min:1|max:9999"
+        },
+        "part_quantity": {
+            "migration": "integer|nullable",
+            "validation": "nullable|integer|min:1|max:9999"
+        },
+        "unit": {
+            "migration": "string:6",
+            "validation": "required|max:6|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "supplier_code": {
+            "migration": "string:5|foreign:supplier_code|references:code|on:suppliers|onDelete",
+            "validation": "required|alpha_num|max:5|exists:suppliers,code",
+            "filter": "equal"
+        },
+        "contract_code": {
+            "migration": "string:10",
+            "validation": "required|max:10|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    // Inentory
+    "warehouses": {
+        "code": {
+            "migration": "string:8|unique",
+            "validation": "required|alpha_num|max:8|unique:warehouses,code",
+            "filter": "equal"
+        },
+        "description": {
+            "migration": "string:30",
+            "validation": "required|max:30|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    "warehouse_locations": {
+        "code": {
+            "migration": "string:8|unique",
+            "validation": "required|alpha_num|max:8|unique:warehouse_locations,code",
+            "filter": "equal"
+        },
+        "warehouse_code": {
+            "migration": "string:8|foreign:warehouse_code|references:code|on:warehouses|onDelete",
+            "validation": "required|alpha_num|max:8|exists:warehouses,code",
+            "filter": "equal"
+        },
+        "description": {
+            "migration": "string:30",
+            "validation": "required|max:30|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    "ordering_point_controls": {
+        "part_code": {
+            "migration": "string:10|foreign:part_code|references:code|on:parts|onDelete",
+            "validation": "required|alpha_num|max:10|exists:parts,code",
+            "filter": "equal"
+        },
+        "part_color_code": {
+            "migration": "string:2|foreign:part_color_code|references:code|on:part_colors|onDelete",
+            "validation": "required|alpha_num|max:2|exists:part_colors,code",
+            "filter": "equal"
+        },
+        "standard_stock": {
+            "migration": "mediumInteger",
+            "validation": "required|integer|min:1|max:999"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    "box_types": {
+        "code": {
+            "migration": "string:5|unique",
+            "validation": "required|alpha_num|max:5|unique:box_types,code",
+            "filter": "equal"
+        },
+        "part_code": {
+            "migration": "string:10|foreign:part_code|references:code|on:parts|onDelete",
+            "validation": "required|alpha_num|max:10|exists:parts,code",
+            "filter": "equal"
+        },
+        "description": {
+            "migration": "string:20",
+            "validation": "required|max:20|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "weight": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        },
+        "width": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        },
+        "height": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        },
+        "depth": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        },
+        "quantity": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        },
+        "unit": {
+            "migration": "string:6",
+            "validation": "required|max:6|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+    "warehouse_adjustments" : {
+        "warehouse_code": {
+            "migration": "string:8|foreign:warehouse_code|references:code|on:warehouses|onDelete",
+            "validation": "required|alpha_num|max:8|exists:warehouses,code",
+            "filter": "equal"
+        },
+        "part_code": {
+            "migration": "string:10|foreign:part_code|references:code|on:parts|onDelete",
+            "validation": "required|alpha_num|max:10|exists:parts,code",
+            "filter": "equal"
+        },
+        "part_color_code": {
+            "migration": "string:2|foreign:part_color_code|references:code|on:part_colors|onDelete",
+            "validation": "required|alpha_num|max:2|exists:part_colors,code"
+        },
+        "quantity": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        }
+    },
+
+    // MRP
+    "mrp_week_definitions": {
+        "date": {
+            "migration": "date",
+            "validation": "required|date|date_format:Y-m-d"
+        },
+        "is_holiday": {
+            "migration": "boolean|default:true",
+            "validation": "required|boolean"
+        },
+        "month_no": {
+            "migration": "smallInteger"
+        },
+        "week_no": {
+            "migration": "smallInteger"
+        }
+    },
+    "part_usage_results": {
+        "used_date": {
+            "migration": "date",
+            "validation": "required|date|date_format:Y-m-d"
+        },
+        "part_code": {
+            "migration": "string:10|foreign:part_code|references:code|on:parts|onDelete",
+            "validation": "required|alpha_num|max:10|exists:parts,code",
+            "filter": "equal"
+        },
+        "part_color_code": {
+            "migration": "string:2|foreign:part_color_code|references:code|on:part_colors|onDelete",
+            "validation": "required|alpha_num|max:2|exists:part_colors,code"
+        },
+        "plant_code": {
+            "migration": "string:5|foreign:plants|references:code|on:plants|onDelete",
+            "validation": "required|alpha_num|max:5|exists:plants,code",
+            "filter": "equal"
+        },
+        "quantity": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        }
+    },
+    "production_plans": {
+        "plan_date": {
+            "migration": "date",
+            "validation": "required|date|date_format:Y-m-d"
+        },
+        "msc_code": {
+            "migration": "string:7|foreign:msc_code|references:code|on:mscs|onDelete",
+            "validation": "required|alpha_num|max:7|exists:mscs,code",
+            "filter": "equal"
+        },
+        "vehicle_color_code": {
+            "migration": "string:4|nullable|foreign:interior_code|references:code|on:vehicle_colors|onDelete",
+            "validation": "nullable|alpha_num|max:10|exists:vehicle_colors,code",
+            "filter": "equal"
+        },
+        "volume": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        },
+        "input_file_name": {
+            "migration": "string:255"
+        }
+    }
+}

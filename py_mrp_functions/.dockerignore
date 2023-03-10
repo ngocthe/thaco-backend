@@ -1,0 +1,7 @@
+.gitignore
+.git
+venv
+log
+*.ipynb
+.env.example
+public

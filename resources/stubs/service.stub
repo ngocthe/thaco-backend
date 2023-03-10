@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\{{modelName}};
+
+class {{modelName}}Service extends BaseService
+{
+    /**
+     * @return string
+     */
+    public function model(): string
+    {
+        return {{modelName}}::class;
+    }
+
+    /**
+     * @var array|string[]
+     */
+    protected array $defaultRelations = [
+        'updatedBy'
+    ];
+
+    /**
+     * @param $params
+     */
+    public function addFilter($params = null)
+    {
+        {{filter}}
+    }
+}

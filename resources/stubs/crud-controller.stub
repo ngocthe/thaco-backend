@@ -1,0 +1,125 @@
+<?php
+
+namespace App\Http\Controllers\{{domainFolder}};
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\{{domainFolder}}\{{modelName}}\Create{{modelName}}Request;
+use App\Http\Requests\{{domainFolder}}\{{modelName}}\Update{{modelName}}Request;
+use App\Services\{{modelName}}Service;
+use App\Transformers\{{modelName}}Transformer;
+use Exception;
+use League\Fractal\Manager;
+use MarcinOrlowski\ResponseBuilder\Exceptions\ArrayWithMixedKeysException;
+use MarcinOrlowski\ResponseBuilder\Exceptions\ConfigurationNotFoundException;
+use MarcinOrlowski\ResponseBuilder\Exceptions\IncompatibleTypeException;
+use MarcinOrlowski\ResponseBuilder\Exceptions\InvalidTypeException;
+use MarcinOrlowski\ResponseBuilder\Exceptions\MissingConfigurationKeyException;
+use MarcinOrlowski\ResponseBuilder\Exceptions\NotIntegerException;
+use Symfony\Component\HttpFoundation\Response;
+
+class {{modelName}}Controller extends Controller
+{
+    /**
+     * @var {{modelName}}Service
+     */
+    protected {{modelName}}Service ${{moduleNameLowerCase}}Service;
+    /**
+     * @var {{modelName}}Transformer
+     */
+    protected {{modelName}}Transformer $transformer;
+
+    public function __construct(Manager $fractal, {{modelName}}Service ${{moduleNameLowerCase}}Service, {{modelName}}Transformer ${{moduleNameLowerCase}}Transformer)
+    {
+        $this->{{moduleNameLowerCase}}Service = ${{moduleNameLowerCase}}Service;
+        $this->transformer = ${{moduleNameLowerCase}}Transformer;
+        parent::__construct($fractal);
+    }
+
+    /**
+     * @return Response
+     * @throws ArrayWithMixedKeysException
+     * @throws ConfigurationNotFoundException
+     * @throws IncompatibleTypeException
+     * @throws InvalidTypeException
+     * @throws MissingConfigurationKeyException
+     * @throws NotIntegerException
+     */
+    public function index(): Response
+    {
+        ${{moduleNamePluralLowerCase}} = $this->{{moduleNameLowerCase}}Service->paginate();
+        return $this->responseWithTransformer(${{moduleNamePluralLowerCase}}, $this->transformer);
+    }
+
+    /**
+     * @param Create{{modelName}}Request $request
+     * @return Response
+     * @throws ArrayWithMixedKeysException
+     * @throws ConfigurationNotFoundException
+     * @throws IncompatibleTypeException
+     * @throws InvalidTypeException
+     * @throws MissingConfigurationKeyException
+     * @throws NotIntegerException
+     * @throws Exception
+     */
+    public function store(Create{{modelName}}Request $request): Response
+    {
+        $attributes = $request->only([
+            {{fields}}
+        ]);
+        ${{moduleNameLowerCase}} = $this->{{moduleNameLowerCase}}Service->store($attributes);
+        return $this->responseWithTransformer(${{moduleNameLowerCase}}, $this->transformer);
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     * @throws ArrayWithMixedKeysException
+     * @throws ConfigurationNotFoundException
+     * @throws IncompatibleTypeException
+     * @throws InvalidTypeException
+     * @throws MissingConfigurationKeyException
+     * @throws NotIntegerException
+     */
+    public function show(int $id): Response
+    {
+        ${{moduleNameLowerCase}} = $this->{{moduleNameLowerCase}}Service->show($id);
+        return $this->responseWithTransformer(${{moduleNameLowerCase}}, $this->transformer);
+    }
+
+    /**
+     * @param int $id
+     * @param Update{{modelName}}Request $request
+     * @return Response
+     * @throws ArrayWithMixedKeysException
+     * @throws ConfigurationNotFoundException
+     * @throws IncompatibleTypeException
+     * @throws InvalidTypeException
+     * @throws MissingConfigurationKeyException
+     * @throws NotIntegerException
+     * @throws Exception
+     */
+    public function update(int $id, Update{{modelName}}Request $request): Response
+    {
+        $attributes = $request->only([
+            {{fields}}
+        ]);
+        ${{moduleNameLowerCase}} = $this->{{moduleNameLowerCase}}Service->update($id, $attributes);
+        return $this->responseWithTransformer(${{moduleNameLowerCase}}, $this->transformer);
+    }
+
+    /**
+     * @param int $id
+     * @return Response
+     * @throws ArrayWithMixedKeysException
+     * @throws ConfigurationNotFoundException
+     * @throws IncompatibleTypeException
+     * @throws InvalidTypeException
+     * @throws MissingConfigurationKeyException
+     * @throws NotIntegerException
+     */
+    public function destroy(int $id): Response
+    {
+        $this->{{moduleNameLowerCase}}Service->destroy($id);
+        return $this->respond();
+    }
+}

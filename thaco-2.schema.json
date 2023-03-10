@@ -1,0 +1,70 @@
+{
+    "vietnam_source_logs": {
+        "contract_code": {
+            "migration": "string:9",
+            "validation": "required|string|max:9|regex:/[a-zA-Z0-9-\\s]+/",
+            "filter": "equal"
+        },
+        "invoice_code": {
+            "migration": "string:10|nullable",
+            "validation": "nullable|string|max:10|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "bill_of_lading_code": {
+            "migration": "string:13|nullable",
+            "validation": "nullable|string|max:13|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "container_code": {
+            "migration": "string:11",
+            "validation": "required|string|max:11|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "case_code": {
+            "migration": "string:9|nullable",
+            "validation": "nullable|string|max:9|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "part_code": {
+            "migration": "string:10",
+            "validation": "required|string|max:10|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "part_color_code": {
+            "migration": "string:2",
+            "validation": "required|string|max:2|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "box_type_code": {
+            "migration": "string:5",
+            "validation": "required|string|max:5|regex:/[a-zA-Z0-9\\s]+/"
+        },
+        "box_quantity": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        },
+        "part_quantity": {
+            "migration": "integer",
+            "validation": "required|integer|min:1|max:9999"
+        },
+        "unit": {
+            "migration": "string:6",
+            "validation": "required|string|max:6"
+        },
+        "supplier_code": {
+            "migration": "string:8",
+            "validation": "required|string|max:8|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        },
+        "delivery_date": {
+            "migration": "date",
+            "validation": "required|date|date_format:Y-m-d",
+            "filter": "equal"
+        },
+        "plant_code": {
+            "migration": "string:5",
+            "validation": "required|string|max:5|regex:/[a-zA-Z0-9\\s]+/",
+            "filter": "equal"
+        }
+    }
+}

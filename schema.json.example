@@ -1,0 +1,38 @@
+{
+    "posts": {
+        "name": {
+            "migration": "string:50|index:50",
+            "validation": "required|min:5|max:255"
+        },
+        "status": {
+            "migration": "enum:active,inactive|default:active",
+            "validation": "numeric|nullable"
+        },
+        "text": {
+            "migration": "text",
+            "validation": "required"
+        },
+        "slug": {
+            "migration": "string:50|unique",
+            "validation": "required|unique|max:50"
+        },
+        "active": {
+            "migration": "boolean|default:false",
+            "validation": "boolean|nullable"
+        },
+        "user_id": {
+            "migration": "foreign|nullable|constrained|onDelete",
+            "validation": "numeric|exists:App\\Models\\User,id"
+        }
+    },
+    "categories": {
+        "name": {
+            "migration": "string",
+            "validation": "required|min:5|max:255"
+        },
+        "image": {
+            "migration": "string",
+            "validation": "required|min:5|max:255"
+        }
+    }
+}
